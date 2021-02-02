@@ -25,7 +25,6 @@ function Word({word}) {
  }else{
   setIsisogram(false);
  }
-
  }
 
  const renderIsogram = () => {
@@ -36,14 +35,10 @@ function Word({word}) {
   <div>
     <WordContainer className="word-container">
      <h1>{word}</h1>
-     <button onClick={() => isogramCheck(word)}>isogram check</button>
      {isIsogram !== null ? renderIsogram() : null }
+     <button onClick={() => isogramCheck(word)}>isogram check</button>
     </WordContainer>
-   
-   <div>
-     <h4>Isogram</h4>
-     <p>An isogram is a word that has no repeating letters, consecutive or non-consecutive.</p>
-    </div>
+    
   </div>
  )
 }
