@@ -1,7 +1,8 @@
 import React from 'react'
 import './App.css';
 import Word from './components/word'
-import Particles from "react-tsparticles";
+import Isogram from './components/Isogram';
+import Pangram from "./components/Pangram";
 
 
 class App extends React.Component{
@@ -9,7 +10,9 @@ class App extends React.Component{
     super()
     this.state = {
       word: "",
-      definition: ""
+      definition: "",
+      isIsogram: null,
+      isPangram: null
     }
   }
 
@@ -17,6 +20,18 @@ class App extends React.Component{
     this.setState({
       word: data[0].word,
       definition: data[0].definition
+    })
+  }
+
+  setIsisogram = (bool) => {
+    this.setState({
+      isIsogram: bool
+    })
+  }
+
+  setIsPangram = (bool) => {
+    this.setState({
+      isPangram: bool
     })
   }
 
@@ -29,92 +44,20 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-        <Word word={this.state.word}/>
-        <div className="particles">
-        <Particles
-        id="tsparticles"
-        options={{
-          background: {
-            color: {
-              value: "#0d47a1",
-            },
-          },
-          fpsLimit: 60,
-          interactivity: {
-            detectsOn: "canvas",
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-              resize: true,
-            },
-            modes: {
-              bubble: {
-                distance: 400,
-                duration: 2,
-                opacity: 0.8,
-                size: 40,
-              },
-              push: {
-                quantity: 4,
-              },
-              repulse: {
-                distance: 200,
-                duration: 0.4,
-              },
-            },
-          },
-          particles: {
-            color: {
-              value: "#ffffff",
-            },
-            links: {
-              color: "#ffffff",
-              distance: 150,
-              enable: true,
-              opacity: 0.5,
-              width: 1,
-            },
-            collisions: {
-              enable: true,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outMode: "bounce",
-              random: false,
-              speed: 6,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-                value_area: 800,
-              },
-              value: 80,
-            },
-            opacity: {
-              value: 0.5,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              random: true,
-              value: 5,
-            },
-          },
-          detectRetina: true,
-        }}
-      />
-    );
-  }
-}
+        <div className="row">
+          <div className="col-6">
+            <Word word={this.state.word}/>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <Isogram isIsogram={this.state.isIsogram} word={this.state.word} setIsisogram={this.setIsisogram}/>
+          </div>
+
+          <div className="col">
+            <Pangram word={this.state.word} setPangram={this.setIsPangram} isPangram={this.state.isPangram}/>
+          </div>
         </div>
       </div>
     );
